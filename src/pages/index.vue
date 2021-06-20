@@ -1,6 +1,12 @@
 <template>
   <div class="main">
-    <h1>{{ title }}</h1>
+    <table>
+      <tr>
+        <th>Colors🎨</th>
+        <th>Books📚</th>
+        <th>Foods🍔</th>
+      </tr>
+    </table>
   </div>
 </template>
 
@@ -16,3 +22,11 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="scss" scoped>
+.main {
+  table {
+    border-collapse: collapse;
+  }
+}
+</style>

@@ -15,7 +15,9 @@
     "@vue/composition-api": "^1.0.0-rc.12",
     "core-js": "^3.9.1",
     "element-ui": "^2.15.1",
-    "nuxt": "^2.15.3"
+    "nuxt": "^2.15.3",
+    "stylus": "^0.54.8",
+    "stylus-loader": "^6.1.0"
   },
   "devDependencies": {
     "@nuxt/types": "^2.15.3",
