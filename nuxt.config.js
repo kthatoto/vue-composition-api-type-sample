@@ -3,7 +3,7 @@ export default {
   srcDir: 'src',
   target: 'static',
   head: {
-    title: 'composition-api-types',
+    title: 'composition-api-type-sample',
     htmlAttrs: {
       lang: 'en'
     },

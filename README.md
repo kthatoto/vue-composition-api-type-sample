@@ -1,1 +1,1 @@
-# composition-api-types
+# composition-api-type-sample
