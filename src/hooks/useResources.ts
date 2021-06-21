@@ -1,41 +1,40 @@
-import { reactive, computed, toRefs } from '@vue/composition-api'
+import { computed, ref, UnwrapRef } from '@vue/composition-api'
 
-interface Resource {
+interface IResource {
   id: number
   name: string
 }
 
-interface State<T> {
-  resources: T[]
-  params: Partial<T>
-  nextId: number
-  selectedResourceId?: number
-}
+// interface State<Resource> {
+//   resources: Resource[]
+//   params: Resource
+//   nextId: number
+//   selectedResourceId?: number
+// }
 
-export default () => {
-  const state = reactive<State<Resource>>({
-    resources: [],
-    params: {},
-    nextId: 0,
-    selectedResourceId: undefined
-  })
+export default <Resource extends IResource>() => {
+  const resources = ref<Resource[]>([])
+  const params = ref<Partial<Resource>>({})
+  const nextId = ref<number>(0)
+  const selectedResourceId = ref<number | undefined>(undefined)
 
   const createResource = () => {
-    const newParams = { id: ++state.nextId, name: state.params.name || '' }
-    state.resources.push(newParams)
-    state.params = {}
+    params.value.id = ++nextId.value
+    resources.value.push(params.value)
+    params.value = {}
   }
 
-  const setResources = (resources: Resource[]) => {
-    state.resources = resources
+  const setResources = (newResources: Resource[]) => {
+    resources.value = newResources as UnwrapRef<Resource[]>
   }
 
   const selectedResource = computed<Resource | undefined>(() => {
-    return state.resources.find((r: Resource) => r.id === state.selectedResourceId)
+    return resources.value.find((r: Resource) => r.id === selectedResourceId.value)
   })
 
   return {
-    ...toRefs(state),
+    resources,
+    params,
     createResource,
     setResources,
     selectedResource
