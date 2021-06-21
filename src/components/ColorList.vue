@@ -35,7 +35,7 @@ interface Color {
 
 export default defineComponent({
   setup () {
-    const { params, resources, createResource } = useResources<Color>()
+    const { params, resources, createResource } = useResources()
 
     return {
       params,

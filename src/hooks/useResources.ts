@@ -1,27 +1,28 @@
-import { reactive, computed, toRefs, UnwrapRef } from '@vue/composition-api'
+import { reactive, computed, toRefs } from '@vue/composition-api'
 
-interface State<Resource> {
+interface Resource {
+  id: number
+  name: string
+}
+
+interface State {
   resources: Resource[]
   params: Partial<Resource>
   nextId: number
   selectedResourceId?: number
 }
 
-interface BasicResource {
-  id: number
-}
-
-export default <Resource extends BasicResource>() => {
-  const state = reactive<State<Resource>>({
+export default () => {
+  const state = reactive<State>({
     resources: [],
     params: {},
     nextId: 0,
     selectedResourceId: undefined
-  }) as UnwrapRef<State<Resource>>
+  })
 
   const createResource = () => {
-    state.params.id = ++state.nextId
-    state.resources.push(state.params)
+    const newParams = { id: ++state.nextId, name: state.params.name || '' }
+    state.resources.push(newParams)
     state.params = {}
   }
 
