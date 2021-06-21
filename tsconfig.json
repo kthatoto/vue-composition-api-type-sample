@@ -16,12 +16,10 @@
     "experimentalDecorators": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": [
-        "./*"
-      ],
-      "@/*": [
-        "./*"
-      ]
+      "~/*": ["src/*"],
+      "@/*": ["src/*"],
+      "~domains/*": ["domains/*"],
+      "~server/*": ["server/*"]
     },
     "types": [
       "@nuxt/types",
@@ -29,6 +27,7 @@
       "@types/node"
     ]
   },
+  "include": ["./**/*.vue", "./**/*.ts"],
   "exclude": [
     "node_modules",
     ".nuxt",

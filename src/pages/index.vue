@@ -4,8 +4,6 @@
 
     <div class="lists">
       <ColorList />
-      <BookList />
-      <FoodList />
     </div>
   </div>
 </template>
@@ -14,8 +12,6 @@
 import { defineComponent } from '@vue/composition-api'
 
 import ColorList from '@/components/ColorList.vue'
-import BookList from '@/components/BookList.vue'
-import FoodList from '@/components/FoodList.vue'
 
 // interface Book {
 //   id: number
@@ -31,6 +27,15 @@ import FoodList from '@/components/FoodList.vue'
 // }
 
 export default defineComponent({
-  components: { ColorList, BookList, FoodList }
+  components: { ColorList }
 })
 </script>
+
+<style lang="scss" scoped>
+.main {
+  padding: 50px;
+  h1 {
+    margin-bottom: 50px;
+  }
+}
+</style>

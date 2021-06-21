@@ -1,7 +1,10 @@
-import { reactive, computed } from '@vue/composition-api'
+import { reactive, computed, toRefs, UnwrapRef } from '@vue/composition-api'
 
 interface State<Resource> {
   resources: Resource[]
+  params: Partial<Resource>
+  nextId: number
+  selectedResourceId?: number
 }
 
 interface BasicResource {
@@ -10,19 +13,30 @@ interface BasicResource {
 
 export default <Resource extends BasicResource>() => {
   const state = reactive<State<Resource>>({
-    resources: []
-  })
+    resources: [],
+    params: {},
+    nextId: 0,
+    selectedResourceId: undefined
+  }) as UnwrapRef<State<Resource>>
 
-  const createResource = (params: Partial<Resource>) => {
-    const nextId: number = params.id || (Math.max(0, ...(state.resources.map((r: Resource) => r.id))) + 1)
-    state.resources.push({
-      ...params,
-      id: nextId
-    })
+  const createResource = () => {
+    state.params.id = ++state.nextId
+    state.resources.push(state.params)
+    state.params = {}
   }
 
+  const setResources = (resources: Resource[]) => {
+    state.resources = resources
+  }
+
+  const selectedResource = computed<Resource | undefined>(() => {
+    return state.resources.find((r: Resource) => r.id === state.selectedResourceId)
+  })
+
   return {
-    resources: computed(() => state.resources),
-    createResource
+    ...toRefs(state),
+    createResource,
+    setResources,
+    selectedResource
   }
 }
