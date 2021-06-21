@@ -5,15 +5,15 @@ interface Resource {
   name: string
 }
 
-interface State {
-  resources: Resource[]
-  params: Partial<Resource>
+interface State<T> {
+  resources: T[]
+  params: Partial<T>
   nextId: number
   selectedResourceId?: number
 }
 
 export default () => {
-  const state = reactive<State>({
+  const state = reactive<State<Resource>>({
     resources: [],
     params: {},
     nextId: 0,
