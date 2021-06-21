@@ -24,12 +24,12 @@ export default <Resource extends IResource>() => {
     params.value = {}
   }
 
-  const setResources = (newResources: Resource[]) => {
-    resources.value = newResources as UnwrapRef<Resource[]>
+  const setResources = (newResources: UnwrapRef<Resource[]>) => {
+    resources.value = newResources
   }
 
   const selectedResource = computed<Resource | undefined>(() => {
-    return resources.value.find((r: Resource) => r.id === selectedResourceId.value)
+    return resources.value.find((r: IResource) => r.id === selectedResourceId.value) as (Resource | undefined)
   })
 
   return {
